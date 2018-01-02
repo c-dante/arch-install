@@ -6,7 +6,7 @@ timedatectl set-ntp true
 
 # https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LVM_on_LUKS
 
-gdisk /dev/sda
+gdisk /dev/sdb
 # 1 efi and boot - EF00 512mb
 # `n` `enter` for new
 # `enter` partition 1
@@ -25,8 +25,8 @@ gdisk /dev/sda
 # `w` `enter `Y`
 
 #dm-crypt with lvm with / and /home
-cryptsetup luksFormat /dev/sda2
-cryptsetup open --type luks /dev/sda2 lvm
+cryptsetup luksFormat /dev/sdb2
+cryptsetup open --type luks /dev/sdb2 lvm
 
 pvcreate /dev/mapper/lvm
 vgcreate MyStorage /dev/mapper/lvm
@@ -59,9 +59,9 @@ mount /dev/MyStorage/homevol /mnt/home
 
 #no swap for now can add later as a swapfile https://wiki.archlinux.org/index.php/Swap
 #Boot
-mkfs.fat /dev/sda1
+mkfs.fat /dev/sdb1
 mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
+mount /dev/sdb1 /mnt/boot
 
 #edit /etc/pacman.d/mirrorlist
 # Make a backup, grab the current us mirrors, enable all us mirrors, choose the 6 fastest mirrors
@@ -76,7 +76,7 @@ pacstrap -i /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # We download a run the rest of the script in the chroot
-wget -O /mnt/base-install-chroot "https://raw.githubusercontent.com/jplikesbikes/arch-install/master/base-install-chroot"
+wget -O /mnt/base-install-chroot "https://raw.githubusercontent.com/c-dante/arch-install/master/base-install-chroot"
 chmod +x /mnt/base-install-chroot
 arch-chroot /mnt ./base-install-chroot
 
