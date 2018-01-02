@@ -1,0 +1,1 @@
+pacaur -S --no-confirm adobe-source-code-pro-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts aws-cli avahi cmake docker docker-compose docker-machine colordiff google-chrome-dev gvim gzip iputils lm_sensors lsof reflector sbt scala screen terminator the_silver_searcher vim-youcompleteme-git vcsh wget zsh libva-intel-driver
